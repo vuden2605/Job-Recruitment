@@ -1,0 +1,19 @@
+nav class='border-b border-gray-200 py-3'
+  div class='container mx-auto px-4 flex items-center justify-between'
+
+    / Logo
+    = link_to 'JobBoard', root_path, class: 'text-xl font-bold text-gray-900'
+
+    / Nav links
+    div class='hidden md:flex items-center gap-6 text-sm'
+      = link_to 'Jobs', '#', class: 'text-gray-600 hover:text-gray-900'
+      = link_to 'Companies', '#', class: 'text-gray-600 hover:text-gray-900'
+
+    / Auth
+    div class='flex items-center gap-3 text-sm'
+
+      = link_to 'Dashboard', '#', class: 'text-gray-600 hover:text-gray-900'
+      = link_to 'Sign out', '#', data: { turbo_method: :delete }, class: 'text-gray-600 hover:text-gray-900'
+
+      = link_to 'Sign in', '#', class: 'text-gray-600 hover:text-gray-900'
+      = link_to 'Register', '#', class: 'text-gray-900 font-medium'
