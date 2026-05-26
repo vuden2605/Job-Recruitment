@@ -14,8 +14,9 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
-  password: password
-  host: 127.0.0.1
+  password: <%= ENV.fetch('DB_PASSWORD', 'password') %>
+  timeout: 5000
+  host: <%= ENV.fetch('DB_HOST', '127.0.0.1') %>
   port: 3306
 
 development:
