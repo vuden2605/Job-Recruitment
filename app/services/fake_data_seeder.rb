@@ -9,17 +9,13 @@
 class FakeDataSeeder
   # ── Master data pools ──────────────────────────────────────────────
 
-  LOCATIONS = [
-    'Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Hải Phòng', 'Cần Thơ',
-    'Bình Dương', 'Đồng Nai', 'Bà Rịa - Vũng Tàu', 'Hưng Yên', 'Bắc Ninh'
-  ].freeze
+  def locations_data
+    YAML.load_file(Rails.root.join('config/data/locations.yml'))['locations']
+  end
 
-  CATEGORIES = [
-    'Kế toán / Kiểm toán', 'IT - Phần mềm', 'IT - Phần cứng / Mạng',
-    'Kinh doanh / Bán hàng', 'Marketing / Truyền thông', 'Nhân sự',
-    'Hành chính / Văn phòng', 'Logistics / Xuất nhập khẩu',
-    'Kỹ thuật / Cơ khí', 'Tài chính / Ngân hàng'
-  ].freeze
+  def categories_data
+    YAML.load_file(Rails.root.join('config/data/categories.yml'))['categories']
+  end
 
   COMPANY_SUFFIXES = [
     'Việt Nam', 'VN', 'Asia', 'Global', 'Group', 'Corporation', 'Solutions'
@@ -119,8 +115,8 @@ class FakeDataSeeder
   # ── Seed helpers ───────────────────────────────────────────────────
 
   def seed_master_data
-    LOCATIONS.each  { |name| Location.find_or_create_by!(name:) }
-    CATEGORIES.each { |name| Category.find_or_create_by!(name:) }
+    locations_data.each  { |name| Location.find_or_create_by!(name:) }
+    categories_data.each { |name| Category.find_or_create_by!(name:) }
   end
 
   def seed_jobs
@@ -201,7 +197,7 @@ class FakeDataSeeder
   end
 
   def fake_description(title)
-    category = CATEGORIES.sample
+    category = categories_data.sample
     template = DESCRIPTION_TEMPLATES.sample
     format(template, title, category)
   end
