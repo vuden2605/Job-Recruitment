@@ -59,3 +59,6 @@ group :test do
 end
 gem 'slim-rails'
 gem 'cssbundling-rails', '~> 1.4'
+gem 'whenever', require: false
+
+gem 'activerecord-import', '~> 2.2'
