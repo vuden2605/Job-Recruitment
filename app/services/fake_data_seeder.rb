@@ -1,4 +1,6 @@
 class FakeDataSeeder
+  TITLE_SUFFIXES = ['', ' Senior', ' Junior', ' (Urgent)'].freeze
+
   def self.call(count: 50, clear: false)
     new(count:, clear:).call
   end
@@ -35,11 +37,11 @@ class FakeDataSeeder
   end
 
   def locations
-    @locations ||= Location.all.to_a
+    @locations ||= Location.select(:id).to_a
   end
 
   def categories
-    @categories ||= Category.all.to_a
+    @categories ||= Category.select(:id, :name).to_a
   end
 
   def validate_master_data!
@@ -48,13 +50,14 @@ class FakeDataSeeder
   end
 
   def bulk_seed_jobs
-    companies = preload_companies
-    jobs      = build_jobs(companies)
+    @companies = preload_companies
+    jobs      = build_jobs(@companies)
 
-    Job.import!(jobs)
-    @crawl_log.update!(jobs_created: jobs.size)
-
-    attach_categories_bulk(Job.last(@count))
+    ActiveRecord::Base.transaction do
+      Job.import!(jobs)
+      attach_categories_bulk(Job.last(@count))
+      @crawl_log.update!(jobs_created: jobs.size)
+    end
   end
 
   def preload_companies
@@ -109,7 +112,7 @@ class FakeDataSeeder
 
   def random_title
     base   = fake_data['job_titles'].sample
-    suffix = ['', ' Senior', ' Junior', ' (Urgent)'].sample
+    suffix = TITLE_SUFFIXES.sample
     "#{base}#{suffix}"
   end
 
@@ -163,10 +166,7 @@ class FakeDataSeeder
 
   def summary
     result = {
-      jobs:       Job.count,
-      companies:  Company.count,
-      locations:  Location.count,
-      categories: Category.count,
+      jobs:       @crawl_log.jobs_created,
       crawl_log:  @crawl_log.id
     }
     Rails.logger.info("[FakeDataSeeder] Done — #{result}")
