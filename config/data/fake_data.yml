@@ -1,0 +1,79 @@
+company_prefixes:
+  - Công ty TNHH
+  - Công ty Cổ phần
+  - Tập đoàn
+  - Công ty TNHH MTV
+
+company_names:
+  - Tech Innovations
+  - Digital Works
+  - Smart Solutions
+  - Future Systems
+  - Alpha Technology
+  - Viet Finance
+  - Sky Logistics
+  - Green Energy
+  - Blue Ocean Media
+  - Prime Consulting
+  - Golden Gate Trading
+  - Sunrise Manufacturing
+  - Pacific Services
+  - Red Dragon Holdings
+
+company_suffixes:
+  - Việt Nam
+  - VN
+  - Asia
+  - Global
+  - Group
+  - Corporation
+  - Solutions
+
+job_titles:
+  - Nhân Viên Kế Toán
+  - Lập Trình Viên Backend
+  - Lập Trình Viên Frontend
+  - Kỹ Sư DevOps
+  - Nhân Viên Kinh Doanh
+  - Chuyên Viên Marketing
+  - Nhân Viên Nhân Sự
+  - Kế Toán Trưởng
+  - Giám Sát Bán Hàng
+  - Nhân Viên Xuất Nhập Khẩu
+  - Kỹ Sư Phần Mềm
+  - Product Manager
+  - Business Analyst
+  - Data Analyst
+  - UX/UI Designer
+  - Chuyên Viên Tuyển Dụng
+  - Trưởng Phòng Kỹ Thuật
+  - Nhân Viên Hành Chính
+  - Chuyên Viên Tài Chính
+  - QA Engineer
+
+salary_ranges:
+  - Thương lượng
+  - Cạnh tranh
+  - 5 triệu - 8 triệu
+  - 7 triệu - 10 triệu
+  - 8 triệu - 12 triệu
+  - 10 triệu - 15 triệu
+  - 12 triệu - 18 triệu
+  - 15 triệu - 25 triệu
+  - 20 triệu - 35 triệu
+  - Trên 30 triệu
+
+job_types:
+  - Toàn thời gian
+  - Bán thời gian
+  - Remote
+  - Hybrid
+
+description_templates:
+  - "Chúng tôi đang tìm kiếm ứng viên năng động cho vị trí %s. Bạn sẽ làm việc trong môi trường chuyên nghiệp và có cơ hội phát triển."
+  - "Công ty đang cần tuyển %s cho lĩnh vực %s với nhiều phúc lợi hấp dẫn."
+  - "Vị trí %s sẽ tham gia vào các dự án quan trọng cùng đội ngũ giàu kinh nghiệm."
+
+requirement_templates:
+  - "- Tốt nghiệp Đại học\n- Kinh nghiệm %d năm\n- Kỹ năng giao tiếp tốt"
+  - "- Có ít nhất %d năm kinh nghiệm\n- Tư duy phân tích tốt\n- Chủ động trong công việc"
