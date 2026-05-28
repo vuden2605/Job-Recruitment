@@ -1,13 +1,12 @@
 class FakeDataSeeder
   TITLE_SUFFIXES = ['', ' Senior', ' Junior', ' (Urgent)'].freeze
 
-  def self.call(count: 50, clear: false)
-    new(count:, clear:).call
+  def self.call(count: 50)
+    new(count:).call
   end
 
-  def initialize(count:, clear:)
+  def initialize(count:)
     @count = count
-    @clear = clear
   end
 
   def call
@@ -18,7 +17,6 @@ class FakeDataSeeder
     )
 
     validate_master_data!
-    clear_data! if @clear
     bulk_seed_jobs
 
     finish_success
@@ -36,8 +34,8 @@ class FakeDataSeeder
     )
   end
 
-  def locations
-    @locations ||= Location.select(:id).to_a
+  def location_ids
+    @location_ids ||= Location.pluck(:id)
   end
 
   def categories
@@ -45,7 +43,7 @@ class FakeDataSeeder
   end
 
   def validate_master_data!
-    raise 'Locations are empty. Run: rails db:seed:master_data' if locations.empty?
+    raise 'Locations are empty. Run: rails db:seed:master_data' if location_ids.empty?
     raise 'Categories are empty. Run: rails db:seed:master_data' if categories.empty?
   end
 
@@ -78,7 +76,7 @@ class FakeDataSeeder
       Job.new(
         title:        title,
         company:      company,
-        location:     locations.sample,
+        location_id:  location_ids.sample,
         salary:       fake_data['salary_ranges'].sample,
         description:  fake_description(title),
         requirements: fake_requirements,
@@ -142,11 +140,6 @@ class FakeDataSeeder
                 .strip
 
     "https://www.careerlink.vn/tim-viec-lam/#{slug}/#{rand(1_000_000..9_999_999)}"
-  end
-
-  def clear_data!
-    [JobCategory, Job, Company].each(&:delete_all)
-    Rails.logger.info('[FakeDataSeeder] Cleared job data')
   end
 
   def finish_success
